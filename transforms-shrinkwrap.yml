@@ -1,5 +1,10 @@
 ---
 mappings:
+- alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Carrier_Delivery_Performance"
+  modes:
+  - "BUILD"
+  path: "/deprecated-field"
+  rid: "ri.foundry.main.dataset.cd54c698-a8ca-486c-839d-46a7be6780e7"
 - alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Carriers_Final"
   modes:
   - "READ"
@@ -18,5 +23,21 @@ mappings:
 - alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Restock_Recommendations"
   modes:
   - "BUILD"
+  - "READ"
   path: "/deprecated-field"
   rid: "ri.foundry.main.dataset.54100056-dd17-4716-86ba-e10762fbbdc6"
+- alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Shipments_Final"
+  modes:
+  - "READ"
+  path: "/deprecated-field"
+  rid: "ri.foundry.main.dataset.9d76a301-2918-46a0-945b-0012cebd2896"
+- alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Top_Products_Last_Quarter"
+  modes:
+  - "BUILD"
+  path: "/deprecated-field"
+  rid: "ri.foundry.main.dataset.d0e90223-3bd2-4979-b2dc-3e8fe747d955"
+- alias: "/Aplos Data-5a9492/Logistics Supply Chain Challenge/Warehouse_Shortage"
+  modes:
+  - "BUILD"
+  path: "/deprecated-field"
+  rid: "ri.foundry.main.dataset.0adbd71a-4fbe-4c8b-9b1d-57fcb415fdf1"
