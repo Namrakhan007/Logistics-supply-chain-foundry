@@ -1,0 +1,10 @@
+{
+  "parentTemplateId" : "transforms",
+  "childTemplatesByPath" : {
+    "transforms-python" : "python"
+  },
+  "parentTemplateVersion" : "10.174.0",
+  "childTemplateVersionsByPath" : {
+    "transforms-python" : "1.1200.0"
+  }
+}
