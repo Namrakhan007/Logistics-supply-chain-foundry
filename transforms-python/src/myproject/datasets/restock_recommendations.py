@@ -23,7 +23,8 @@ Three layers
    Moving existing stock is cheaper and faster than buying new stock.
 """
 
-from transforms.api import transform_pandas, Input, Output
+from pyspark.sql import functions as F
+from transforms.api import transform, Input, Output
 import heapq
 import math
 
@@ -194,11 +195,22 @@ def build_recommendations(orders: pd.DataFrame,
 PROJECT = "/Aplos Data-5a9492/Logistics Supply Chain Challenge"
 
 
-@transform_pandas(
-    Output(f"{PROJECT}/Restock_Recommendations"),
+@transform(
+    out=Output(f"{PROJECT}/Restock_Recommendations"),
     orders=Input(f"{PROJECT}/Orders_Final"),
     inventory=Input(f"{PROJECT}/Inventory_Final"),
     carriers=Input(f"{PROJECT}/Carriers_Final"),
 )
-def compute(orders, inventory, carriers):
-    return build_recommendations(orders, inventory, carriers)
+def compute(ctx, out, orders, inventory, carriers):
+    pdf = build_recommendations(
+        orders.dataframe().toPandas(),
+        inventory.dataframe().toPandas(),
+        carriers.dataframe().toPandas(),
+    )
+    sdf = ctx.spark_session.createDataFrame(pdf)
+    # The ontology rejects NaN: store "no sales" as an empty (null) value.
+    sdf = sdf.withColumn(
+        "days_of_cover",
+        F.when(F.isnan("days_of_cover"), F.lit(None)).otherwise(F.col("days_of_cover")),
+    )
+    out.write_dataframe(sdf)
